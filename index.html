@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Órarend</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="custom-container">
+    <div id="generator">
+        <h2>Órarend generátor</h2>
+        <div class="row">
+            <div class="col-12 col-md-3">
+                <div class="mb-1"><input type="text" class="form-control" placeholder="Tárgy neve" id="subject">
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-1"><input type="text" class="form-control" placeholder="Tanár neve" id="teacher">
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-1"><input type="text" class="form-control" placeholder="Terem" id="room">
+                    <div class="invalid-feedback"></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="mb-1">
+                    <select class="form-control" id="day">
+                        <option disabled selected style="display: none;" value="none">Válassz napot...</option>
+                        <option value="0">Hétfő</option>
+                        <option value="1">Kedd</option>
+                        <option value="2">Szerda</option>
+                        <option value="3">Csütörtök</option>
+                        <option value="4">Péntek</option>
+                    </select>
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-1"><input type="text" class="form-control" placeholder="Időpont" id="time">
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-1">
+                    <select class="form-control" id="color">
+                        <option disabled selected style="display: none;" value="none">Válassz színt...</option>
+                        <option value="green">Zöld</option>
+                        <option value="orange">Narancssárga</option>
+                        <option value="red">Piros</option>
+                        <option value="yellow">Sárga</option>
+                        <option value="blue">Világoskék</option>
+                        <option value="ping">Pink</option>
+                        <option value="black">Sötétkék</option>
+                    </select>
+                    <div class="invalid-feedback"></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-2">
+                <button class="btn btn-primary mb-1" onclick="addClass()">Hozáadás</button>
+                <button class="btn btn-secondary mb-1" onclick="saveTimetable()">Mentés képként</button>
+                <button class="btn btn-info mb-1" onclick="downloadTimetable()">Mentés (js)</button>
+            </div>
+            <div class="col-12 col-md-3">
+                <h4>Betöltés fájlból</h4>
+                <div class="input-group">
+                    <input type="file" class="form-control" id="file" aria-label="Betöltés" accept=".js">
+                    <button class="btn btn-secondary" type="button" onclick="uploadTimetable()">Betöltés</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="schedule">
+        <div class="s-legend">
+            <div class="s-cell s-head-info">
+                <div class="s-name">Órarend</div>
+            </div>
+            <div class="s-week-day s-cell">
+                <div class="s-day">H</div>
+            </div>
+            <div class="s-week-day s-cell">
+                <div class="s-day">K</div>
+            </div>
+            <div class="s-week-day s-cell">
+                <div class="s-day">SZ</div>
+            </div>
+            <div class="s-week-day s-cell">
+                <div class="s-day">CS</div>
+            </div>
+            <div class="s-week-day s-cell">
+                <div class="s-day">P</div>
+            </div>
+        </div>
+        <div class="s-container s-block">
+            <div class="s-head-info">
+                <div class="s-head-hour">
+                    <div class="s-number">8.00-9.00</div>
+                </div>
+                <div class="s-head-hour">
+                    <div class="s-number">9.00 - 10.00</div>
+                </div>
+                <div class="s-head-hour">
+                    <div class="s-number">10.00 - 11.00</div>
+                </div>
+                <div class="s-head-hour">
+                    <div class="s-number">11.00 - 12.00</div>
+                </div>
+                <div class="s-head-hour">
+                    <div class="s-number">12.00 - 13.00</div>
+                </div>
+                <div class="s-head-hour">
+                    <div class="s-number">13.00 - 14.00</div>
+                </div>
+                <div class="s-head-hour">
+                    <div class="s-number">14.00 - 15.00</div>
+                </div>
+                <div class="s-head-hour">
+                    <div class="s-number">15.00 - 16.00</div>
+                </div>
+                <div class="s-head-hour">
+                    <div class="s-number">16.00 - 17.00</div>
+                </div>
+                <div class="s-head-hour">
+                    <div class="s-number">17.00 - 18.00</div>
+                </div>
+                <div class="s-head-hour">
+                    <div class="s-number">18.00 - 19.00</div>
+                </div>
+                <div class="s-head-hour">
+                    <div class="s-number">19.00 - 20.00</div>
+                </div>
+            </div>
+            <div class="s-rows-container">
+                <div class="s-activities">
+                    <div class="s-act-row"></div>
+                    <div class="s-act-row"></div>
+                    <div class="s-act-row"></div>
+                    <div class="s-act-row"></div>
+                    <div class="s-act-row"></div>
+                </div>
+
+                <!-- 8-9 -->
+                <div class="s-row s-hour-row">
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                </div>
+
+                <!-- 9-10 -->
+                <div class="s-row s-hour-row">
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                </div>
+
+                <!-- 10-11 -->
+                <div class="s-row s-hour-row">
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                </div>
+
+                <!-- 11-12 -->
+                <div class="s-row s-hour-row">
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                </div>
+
+                <!-- 12-13 -->
+                <div class="s-row s-hour-row">
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                </div>
+
+                <!-- 13-14 -->
+                <div class="s-row s-hour-row">
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                </div>
+
+                <!-- 14-15 -->
+                <div class="s-row s-hour-row">
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                </div>
+
+                <!-- 15-16 -->
+                <div class="s-row s-hour-row">
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                </div>
+
+                <!-- 16-17 -->
+                <div class="s-row s-hour-row">
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                </div>
+
+                <!-- 17-18 -->
+                <div class="s-row s-hour-row">
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                </div>
+
+                <!-- 18-19 -->
+                <div class="s-row s-hour-row">
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                </div>
+
+                <!-- 19-20 -->
+                <div class="s-row s-hour-row">
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                    <div class="s-hour-wrapper s-cell">
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                        <div class="s-half-hour"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+<script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="page.js"></script>
+</body>
+</html>

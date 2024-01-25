@@ -1,0 +1,311 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+:root {
+    --primary-light: #8abdff;
+    --primary: #6d5dfc;
+    --primary-dark: #5b0eeb;
+    --white: #fff;
+    --greyLight-1: #e4ebf5;
+    --greyLight-2: #c8d0e7;
+    --greyLight-3: #bec8e4;
+    --greyDark: #9baacf;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body, .custom-container {
+    height: 100%;
+}
+
+body {
+    background: #f7f7f7;
+}
+
+.custom-container {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#generator {
+    width: 100%;
+    margin: 0 auto;
+    font-family: "Roboto", sans-serif;
+}
+
+h2 {
+    font-family: "Lato", "Roboto", sans-serif;
+    padding-bottom: 10px;
+}
+
+h4 {
+    font-family: "Lato", "Roboto", sans-serif;
+}
+
+#schedule {
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    font-family: "Roboto", sans-serif;
+    display: flex;
+}
+
+.s-legend {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100px;
+}
+
+.s-legend .s-head-info {
+    height: 100%;
+}
+
+.s-legend .s-name {
+    margin: 20px auto;
+}
+
+.s-legend .s-week-day {
+    height: 100%;
+    position: relative;
+    box-shadow: inset 0 1px 0 0.5px #f5f5f5;
+}
+
+.s-legend .s-week-day .s-day {
+    width: 100%;
+    margin: 20px auto;
+}
+
+.s-head-info {
+    font-weight: 900;
+    height: 90px;
+    position: relative;
+    width: 100%;
+}
+
+.s-wrapper {
+    display: flex;
+}
+
+.s-block {
+    display: block;
+    text-align: center;
+}
+
+.s-week-day {
+    min-width: 50px;
+    max-width: 150px;
+    width: 100%;
+    height: 65px;
+}
+
+.s-cell {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.s-container {
+    width: 100%;
+    overflow: auto;
+}
+
+.s-container .s-head-info {
+    align-items: center;
+    display: flex;
+}
+
+.s-container .s-head-info .s-head-hour {
+    width: 100%;
+    height: 90px;
+    max-height: 90px;
+    padding: 12px 0;
+    min-width: 76.5px;
+    border-left: 1.2px solid #e9e9e9;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.s-container .s-head-info .s-head-hour .s-number {
+    text-align: center;
+    font-size: 12px;
+}
+
+.s-container .s-head-info .s-head-hour .s-hourly-interval {
+    color: #000000;
+    font-size: 12px;
+}
+
+.s-container .s-rows-container {
+    display: flex;
+    position: relative;
+}
+
+.s-container .s-rows-container .s-activities {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.s-container .s-rows-container .s-activities .s-act-row {
+    position: relative;
+    height: 90px;
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .green {
+    background: linear-gradient(to right, #00b09b, #96c93d);
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .orange {
+    background: linear-gradient(to right, #F2994A, #F2C94C);
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .red {
+    background: linear-gradient(to right, #CB356B, #BD3F32);
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .yellow {
+    background: linear-gradient(to right, #fffc00, #fffc00);
+    color: #000000 !important;
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .blue {
+    background: linear-gradient(to right, #36D1DC, #5B86E5);
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .pink {
+    background: linear-gradient(to right, #834d9b, #d04ed6);
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .black {
+    background: linear-gradient(to right, #000428, #004e92);
+}
+
+.yellow .s-act-name, .yellow .s-wrapper .s-act-teacher, .yellow .s-wrapper .s-act-room {
+    color: #000000 !important;
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .s-act-tab {
+    height: 90px;
+    padding: 15px;
+    /*border-radius: 3px;*/
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .s-act-tab .s-wrapper {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .s-act-tab .s-act-teacher, .s-container .s-rows-container .s-activities .s-act-row .s-act-tab .s-act-room, .s-container .s-rows-container .s-activities .s-act-row .s-act-tab .s-act-group {
+    font-size: 9px;
+    color: white;
+    position: absolute;
+    margin: 5px;
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .s-act-tab .s-act-group {
+    bottom: 0;
+    left: 0;
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .s-act-tab .s-act-name {
+    color: white;
+    font-size: 11px;
+    text-align: center;
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .s-act-tab .s-act-teacher {
+    left: 0;
+    top: 0;
+}
+
+.s-container .s-rows-container .s-activities .s-act-row .s-act-tab .s-act-room {
+    bottom: 0;
+    left: 0;
+}
+
+.s-hour-row {
+    height: 100%;
+    width: 100%;
+    min-width: 76.5px;
+}
+
+.s-hour-row .s-hour-wrapper {
+    display: flex;
+}
+
+.s-hour-row .s-hour-wrapper .s-half-hour:nth-child(2) {
+    border-left: .5px solid #e9e9e9;
+}
+
+.s-hour-row .s-hour-wrapper .s-half-hour {
+    width: 50%;
+    height: 90px;
+    border-left: 1.2px solid #e9e9e9;
+}
+
+@media only screen and (max-width: 480px) {
+    .s-legend {
+        width: 100px;
+    }
+}
+
+.s-hour-row .s-hour-wrapper {
+    box-shadow: inset 0 1px 0 0.5px #f5f5f5;
+}
+
+
+.btn__secondary:active {
+    box-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2), inset -0.2rem -0.2rem 0.5rem var(--white);
+}
+
+.btn span {
+    font-size: 1rem;
+}
+
+/* FORM */
+.form {
+    grid-column: 0.75;
+    grid-row: 0.75;
+}
+
+.form__input {
+    width: 10rem;
+    height: 2rem;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1rem;
+    padding-left: 1.4rem;
+    box-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2), inset -0.2rem -0.2rem 0.5rem var(--white);
+    background: none;
+    font-family: inherit;
+    color: var(--greyDark);
+}
+
+.form__input::placeholder {
+    color: var(--greyLight-3);
+}
+
+.form__input:focus {
+    outline: none;
+    box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
+}
