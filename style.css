@@ -17,7 +17,7 @@
     padding: 0;
 }
 
-html, body, .custom-container {
+html, body {
     height: 100%;
 }
 
@@ -29,11 +29,22 @@ body {
     display: flex;
     width: 80%;
     margin: 0 auto;
-    height: 100%;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 30px;
+}
+
+@media only screen and (max-width: 800px) {
+    .custom-container {
+        padding-top: 50px;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .custom-container {
+        height: 100%;
+    }
 }
 
 #generator {
