@@ -297,28 +297,19 @@ $("#endTime").flatpickr({
     time_24hr: true
 });
 
-function changeTheme(def = false, changeButton = false) {
+function changeTheme(def = false) {
     const sw = document.getElementById('theme');
-
-    if(changeButton) {
-        if(sw.value === "off") {
-            sw.value = "on";
-        } else {
-            sw.value = "off";
-        }
-    }
 
     if(def) {
         if(window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.documentElement.setAttribute('data-bs-theme', 'dark');
-            sw.value = "off";
+            sw.checked = false;
         } else {
             document.documentElement.setAttribute('data-bs-theme', 'light');
-            sw.value = "on";
+            sw.checked = true;
         }
     } else {
-        console.log(sw.value);
-        if(sw.value === "on") {
+        if(sw.checked === true) {
             document.documentElement.setAttribute('data-bs-theme', 'light');
         } else {
             document.documentElement.setAttribute('data-bs-theme', 'dark');
