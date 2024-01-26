@@ -173,7 +173,9 @@ function saveTimetable() {
 function clearInput(input, prune = false) {
     input.classList.remove('is-valid');
     input.classList.remove('is-invalid');
-    input.nextElementSibling.innerHTML = "";
+    if(input.nextElementSibling) {
+        input.nextElementSibling.innerHTML = "";
+    }
 
     if (prune) {
         if (input.tagName === "SELECT") {
@@ -189,31 +191,30 @@ function checkInput(input) {
 
     const errorField = input.nextElementSibling;
     if (input.value === "" || input.value === "none") {
-        errorField.innerHTML = "A mező nem lehet üres!";
+        input.nextElementSibling.innerHTML = "A mező nem lehet üres!";
         input.classList.add('is-invalid');
         return false;
     } else {
-        if (input.id === "time") {
-            let pattern = /^(1)?[0-9]\.[0-9][0-9]-(1)?[0-9]\.[0-9][0-9]$/gi;
-            if (!pattern.test(input.value)) {
-                errorField.innerHTML = "Kérlek használd az alábbi formátumot: 8.00-10.30";
-                input.classList.add('is-invalid');
-                return false;
-            } else {
-                const time = input.value.split('-');
-                if (parseInt(time[0]) > parseInt(time[1])) {
-                    errorField.innerHTML = "A befejezés időpontja nem lehet hamarabb, mint a kezdés időpontja!";
-                    input.classList.add('is-invalid');
-                    return false;
-                } else {
-                    input.classList.add('is-valid');
-                    return true;
-                }
-            }
-        } else {
-            input.classList.add('is-valid');
-            return true;
-        }
+        input.classList.add('is-valid');
+        return true;
+    }
+}
+
+function checkTime(startTime, endTime) {
+    clearInput(startTime);
+    clearInput(endTime);
+
+    if (endTime.value < startTime.value) {
+        document.getElementById('time-error').innerHTML = "A befejezés ideje nem lehet hamarabb, mint a kezdés ideje!";
+        document.getElementById('time-error').style = "display: block;";
+        startTime.classList.add('is-invalid');
+        endTime.classList.add('is-invalid');
+        return false;
+    } else {
+        document.getElementById('time-error').style = "display: none;";
+        startTime.classList.add('is-valid');
+        endTime.classList.add('is-valid');
+        return true;
     }
 }
 
@@ -222,7 +223,8 @@ function addClass() {
     const teacher = document.getElementById('teacher');
     const room = document.getElementById('room');
     const day = document.getElementById('day');
-    const time = document.getElementById('time');
+    const startTime = document.getElementById('startTime');
+    const endTime = document.getElementById('endTime');
     const color = document.getElementById('color');
 
     let inputs = [];
@@ -232,19 +234,18 @@ function addClass() {
     inputs[2] = checkInput(room);
     inputs[3] = checkInput(color);
     inputs[4] = checkInput(day);
-    inputs[5] = checkInput(time);
+    inputs[5] = checkTime(startTime, endTime);
 
     if (inputs.every(element => element === true)) {
-        schedule.activities.add(day.value, className.value, time.value, room.value, teacher.value, color.value);
+        schedule.activities.add(day.value, className.value, startTime.value.replace(":", ".") + "-" + endTime.value.replace(":", "."), room.value, teacher.value, color.value);
 
-        commands += "schedule.activities.add(" + day.value + ", \"" + className.value + "\", \"" + time.value + "\", \"" + room.value + "\", \"" + teacher.value + "\", \"" + color.value + "\");";
+        commands += "schedule.activities.add(" + day.value + ", \"" + className.value + "\", \"" + startTime.value.replace(":", ".") + "-" + endTime.value.replace(":", ".") + "\", \"" + room.value + "\", \"" + teacher.value + "\", \"" + color.value + "\");";
 
         clearInput(className, true);
         clearInput(teacher, true);
         clearInput(room, true);
         clearInput(color, true);
         clearInput(day, true);
-        clearInput(time, true);
     }
 }
 
@@ -272,3 +273,26 @@ function uploadTimetable() {
 
     document.getElementById("file").value = "";
 }
+
+
+$("#startTime").flatpickr({
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    minTime: "08:00",
+    maxTime: "20:00",
+    defaultDate: "08:00",
+    minuteIncrement: 15,
+    time_24hr: true
+});
+
+$("#endTime").flatpickr({
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    minTime: "08:00",
+    maxTime: "20:00",
+    defaultDate: "09:00",
+    minuteIncrement: 15,
+    time_24hr: true
+});
