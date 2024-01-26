@@ -5,14 +5,14 @@ var schedule = {
     options: {
         schedule: '#schedule',
         breaks: [0, 0, 0, 0, 0, 0, 0, 0, 0], // breaks duration
-        s_breaks: [480, 540, 600, 660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200], // the time after which the break begins
+        s_breaks: [480, 540, 600, 660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200, 1260, 1320], // the time after which the break begins
         lesson_time: 15, // lesson duration (minutes)
-        lessons: 48, // number of lessons per week
+        lessons: 56, // number of lessons per week
         start: function () { // start at 8.00
             return schedule.general.toMin(8, 0)
         },
         end: function () { // start at 20.00
-            return schedule.general.toMin(20, 0)
+            return schedule.general.toMin(22, 0)
         },
         h_width: $('.s-hour-row').width(), // get a width of hour div
         minToPx: function () { // divide the box width by the duration of one lesson
