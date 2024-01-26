@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="hu">
+<html lang="hu" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -7,16 +7,33 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Órarend Generátor</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="changeTheme(true)">
 <div class="custom-container">
     <div id="generator">
-        <h2>Órarend generátor</h2>
+        <div class="row justify-content-between mt-3 mb-3">
+            <div class="col-auto">
+                <h2 class="d-inline-block mb-0">Órarend generátor</h2>
+                <sub class="d-inline-block">by tokrist</sub>
+            </div>
+            <div class="col-auto">
+                <div class="row justify-content-end">
+                    <div class="col-auto p-0"><i class="fa-solid fa-moon"></i></div>
+                    <div class="col-auto p-0 ps-2">
+                        <div class="form-check form-switch mb-0">
+                            <input class="form-check-input" type="checkbox" role="switch" value="on" id="theme" onclick="changeTheme(false, true)">
+                        </div>
+                    </div>
+                    <div class="col-auto p-0"><i class="fa-solid fa-sun"></i></div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-3">
                 <div class="mb-1">
@@ -58,13 +75,16 @@
                 <div class="mb-1">
                     <select class="form-control" id="color">
                         <option disabled selected style="display: none;" value="none">Válassz színt...</option>
-                        <option value="green">Zöld</option>
+                        <option value="cyan">Ciánkék</option>
+                        <option value="purple">Lila</option>
                         <option value="orange">Narancssárga</option>
-                        <option value="red">Piros</option>
-                        <option value="yellow">Sárga</option>
-                        <option value="blue">Világoskék</option>
                         <option value="ping">Pink</option>
+                        <option value="red">Piros</option>
                         <option value="black">Sötétkék</option>
+                        <option value="gray">Szürke</option>
+                        <option value="blue">Világoskék</option>
+                        <option value="dark-red">Vörös</option>
+                        <option value="green">Zöld</option>
                     </select>
                     <div class="invalid-feedback"></div>
                 </div>
@@ -562,6 +582,19 @@
             </div>
         </div>
     </div>
+</div>
+<div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+            <span class="mb-3 mb-md-0 text-body-secondary">Copyright &copy; 2024 | <a href="https://tokrist.hu">tokrist.hu</a></span>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+        </ul>
+    </footer>
 </div>
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>

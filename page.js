@@ -296,3 +296,32 @@ $("#endTime").flatpickr({
     minuteIncrement: 15,
     time_24hr: true
 });
+
+function changeTheme(def = false, changeButton = false) {
+    const sw = document.getElementById('theme');
+
+    if(changeButton) {
+        if(sw.value === "off") {
+            sw.value = "on";
+        } else {
+            sw.value = "off";
+        }
+    }
+
+    if(def) {
+        if(window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-bs-theme', 'dark');
+            sw.value = "off";
+        } else {
+            document.documentElement.setAttribute('data-bs-theme', 'light');
+            sw.value = "on";
+        }
+    } else {
+        console.log(sw.value);
+        if(sw.value === "on") {
+            document.documentElement.setAttribute('data-bs-theme', 'light');
+        } else {
+            document.documentElement.setAttribute('data-bs-theme', 'dark');
+        }
+    }
+}

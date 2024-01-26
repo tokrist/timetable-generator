@@ -17,12 +17,8 @@
     padding: 0;
 }
 
-html, body {
-    height: 100%;
-}
-
 body {
-    background: #f7f7f7;
+    background-color: var(--bs-body-bg);
 }
 
 .custom-container {
@@ -35,39 +31,22 @@ body {
     gap: 30px;
 }
 
-@media only screen and (max-width: 800px) {
-    .custom-container {
-        padding-top: 50px;
-    }
-}
-
-@media only screen and (min-width: 800px) {
-    .custom-container {
-        height: 100%;
-    }
-}
-
 #generator {
     width: 100%;
     margin: 0 auto;
     font-family: "Roboto", sans-serif;
 }
 
-h2 {
-    font-family: "Lato", "Roboto", sans-serif;
-    padding-bottom: 10px;
-}
-
-h4 {
+h2, h4 {
     font-family: "Lato", "Roboto", sans-serif;
 }
 
 #schedule {
     width: 100%;
-    margin: 0 auto;
-    background: #fff;
     font-family: "Roboto", sans-serif;
     display: flex;
+    background-color: var(--bs-secondary-bg) ;
+    margin: 0 auto 75px;
 }
 
 .s-legend {
@@ -174,37 +153,44 @@ h4 {
     height: 90px;
 }
 
-.s-container .s-rows-container .s-activities .s-act-row .green {
+.green {
     background: linear-gradient(to right, #00b09b, #96c93d);
 }
 
-.s-container .s-rows-container .s-activities .s-act-row .orange {
+.orange {
     background: linear-gradient(to right, #F2994A, #F2C94C);
 }
 
-.s-container .s-rows-container .s-activities .s-act-row .red {
+.red {
     background: linear-gradient(to right, #CB356B, #BD3F32);
 }
 
-.s-container .s-rows-container .s-activities .s-act-row .yellow {
-    background: linear-gradient(to right, #fffc00, #fffc00);
-    color: #000000 !important;
+.gray {
+    background: linear-gradient(to right, #303036, #4D4A55);
 }
 
-.s-container .s-rows-container .s-activities .s-act-row .blue {
+.blue {
     background: linear-gradient(to right, #36D1DC, #5B86E5);
 }
 
-.s-container .s-rows-container .s-activities .s-act-row .pink {
+.pink {
     background: linear-gradient(to right, #834d9b, #d04ed6);
 }
 
-.s-container .s-rows-container .s-activities .s-act-row .black {
+.black {
     background: linear-gradient(to right, #000428, #004e92);
 }
 
-.yellow .s-act-name, .yellow .s-wrapper .s-act-teacher, .yellow .s-wrapper .s-act-room {
-    color: #000000 !important;
+.cyan {
+    background: linear-gradient(to right, #30BCED, #48A5EA);
+}
+
+.dark-red {
+    background: linear-gradient(to right, #3C0919, #5E2C1E);
+}
+
+.purple {
+    background: linear-gradient(to right, #655A7C, #A06A90);
 }
 
 .s-container .s-rows-container .s-activities .s-act-row .s-act-tab {
