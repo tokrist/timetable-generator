@@ -165,7 +165,7 @@ let commands = "";
 
 function saveTimetable() {
     html2canvas(document.querySelector("#schedule")).then((canvas) => {
-        document.body.appendChild(canvas);
+        //document.body.appendChild(canvas);
         Canvas2Image.saveAsPNG(canvas);
     });
 }
